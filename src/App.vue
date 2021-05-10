@@ -3,34 +3,44 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Vue dobbelstenen"/>
     <button @click="RollDice">Rol dobbelstenen</button>
+    <br><br>
+    <div v-for="(n, index) in rolledNumbers" :key="index">{{ index + ': ' + n }}</div>
   </div>
 </template>
 
 <script>
-//import DisplayResult from './components/DisplayResult.vue'
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    //DisplayResult,
   },
 
   methods: {
     RollDice() {  
-      //let rolledNumbers = [0, 0, 0, 0, 0, 0];
-
-      for (let i = 0; i < this.dices.length; i++) {
+      for (let i = 0; i < this.numberOfDices; i++) {
         this.dices[i] = Math.floor(Math.random() * 6) + 1;
       }
-      this.dices = this.dices.sort();
+
+      for (let i in this.rolledNumbers) {
+        this.rolledNumbers[i] = this.dices.filter(die => die == i).length
+      }
     }
   },
 
-    data() {
+    data() {  
       return {
-        dices: [0, 0, 0, 0, 0, 0]
+        dices: [],
+        numberOfDices: 8,
+        rolledNumbers: {
+          1:0, 
+          2:0, 
+          3:0, 
+          4:0, 
+          5:0, 
+          6:0
+        }
     }
   },
 }
