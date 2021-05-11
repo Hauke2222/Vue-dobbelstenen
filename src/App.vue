@@ -4,7 +4,7 @@
     <HelloWorld msg="Vue dobbelstenen"/>
     <button @click="RollDice">Rol dobbelstenen</button>
     <br><br>
-    <div v-for="(n, index) in rolledNumbers" :key="index">{{ index + ': ' + n }}</div>
+    <div v-for="(n, index) in rolledNumbers" :key="index">{{ n.unicode + ': ' + n.value }}</div>
   </div>
 </template>
 
@@ -22,10 +22,14 @@ export default {
       for (let i = 0; i < this.numberOfDices; i++) {
         this.dices[i] = Math.floor(Math.random() * 6) + 1;
       }
+      console.log(this.dices);
+      //let i in this.rolledNumbers
 
-      for (let i in this.rolledNumbers) {
-        this.rolledNumbers[i] = this.dices.filter(die => die == i).length
+       for (let i = 0; i < 6; i++) {
+        console.log(i);
+        this.rolledNumbers[i].value = this.dices.filter(die => die == i).length;
       }
+      console.log(this.rolledNumbers);
     }
   },
 
@@ -33,14 +37,14 @@ export default {
       return {
         dices: [],
         numberOfDices: 8,
-        rolledNumbers: {
-          1:0, 
-          2:0, 
-          3:0, 
-          4:0, 
-          5:0, 
-          6:0
-        }
+        rolledNumbers: [
+          {'eyes': 1, value: 0, unicode: '\u2680'}, 
+          {'eyes': 2, value: 0, unicode: '\u2681'}, 
+          {'eyes': 3, value: 0, unicode: '\u2682'}, 
+          {'eyes': 4, value: 0, unicode: '\u2683'}, 
+          {'eyes': 5, value: 0, unicode: '\u2684'}, 
+          {'eyes': 6, value: 0, unicode: '\u2685'}
+        ]
     }
   },
 }
