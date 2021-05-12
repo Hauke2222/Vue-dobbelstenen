@@ -4,7 +4,7 @@
     <HelloWorld msg="Vue dobbelstenen"/>
     <button @click="RollDice">Rol dobbelstenen</button>
     <br><br>
-    <div v-for="(n, index) in rolledNumbers" :key="index">{{ n.unicode + ': ' + n.value }}</div>
+    <div style="font-size: 32px" v-for="(n, index) in rolledNumbers" :key="index">{{ n.unicode + ': ' + n.value }}</div>
   </div>
 </template>
 
@@ -22,14 +22,9 @@ export default {
       for (let i = 0; i < this.numberOfDices; i++) {
         this.dices[i] = Math.floor(Math.random() * 6) + 1;
       }
-      console.log(this.dices);
-      //let i in this.rolledNumbers
-
-       for (let i = 0; i < 6; i++) {
-        console.log(i);
-        this.rolledNumbers[i].value = this.dices.filter(die => die == i).length;
+      for (let i = 0; i < this.dices.length; i++) {
+        this.rolledNumbers[this.dices[i]-1].value++;
       }
-      console.log(this.rolledNumbers);
     }
   },
 
@@ -57,7 +52,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
   margin-top: 60px;
 }
 </style>
