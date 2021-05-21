@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Vue dobbelstenen" />
+    <ShowMessage msg="Vue dobbelstenen" />
     <button @click="RollDice">Rol dobbelstenen</button>
     <br /><br />
     <div
@@ -15,22 +15,19 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import ShowMessage from "./components/ShowMessage.vue";
 
 export default {
   name: "App",
   components: {
-    HelloWorld, // todo: kies duidelijk omschrijvende naam, bijv.: ShowMessage
+    ShowMessage,
   },
 
   methods: {
     RollDice() {
+      Object.assign(this.$data, this.$options.data.apply(this)); // Resets this.rolledNumbers
       for (let i = 0; i < this.numberOfDices; i++) {
         this.dices[i] = Math.floor(Math.random() * 6) + 1;
-        // todo: onderstaande telling voor rolledNumbers kun je in deze for-loop integreren om 1 for-loop uit te sparen
-      }
-      // todo: reset this.rolledNumbers voor iedere worp, anders blijft deze doortellen
-      for (let i = 0; i < this.dices.length; i++) {
         this.rolledNumbers[this.dices[i] - 1].value++;
       }
     },
