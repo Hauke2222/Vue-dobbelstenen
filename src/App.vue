@@ -2,7 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <ShowMessage msg="Vue dobbelstenen" />
-    <button @click="RollDice">Rol dobbelstenen</button>
+    <button @click="rollDice">Rol dobbelstenen</button>
     <br /><br />
     <div
       style="font-size: 32px"
@@ -24,27 +24,33 @@ export default {
   },
 
   methods: {
-    RollDice() {
-      Object.assign(this.$data, this.$options.data.apply(this)); // Resets this.rolledNumbers
+    rollDice() {
+      this.resetRolledNumbers();
       for (let i = 0; i < this.numberOfDices; i++) {
         this.dices[i] = Math.floor(Math.random() * 6) + 1;
         this.rolledNumbers[this.dices[i] - 1].value++;
       }
     },
-  },
-
-  data() {
-    return {
-      dices: [],
-      numberOfDices: 8,
-      rolledNumbers: [
+    resetRolledNumbers() {
+      this.rolledNumbers = [
         { eyes: 1, value: 0, unicode: "\u2680" },
         { eyes: 2, value: 0, unicode: "\u2681" },
         { eyes: 3, value: 0, unicode: "\u2682" },
         { eyes: 4, value: 0, unicode: "\u2683" },
         { eyes: 5, value: 0, unicode: "\u2684" },
         { eyes: 6, value: 0, unicode: "\u2685" },
-      ],
+      ];
+    },
+  },
+  created() {
+    this.resetRolledNumbers();
+  },
+
+  data() {
+    return {
+      dices: [],
+      numberOfDices: 8,
+      rolledNumbers: [],
     };
   },
 };
