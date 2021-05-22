@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
-    <ShowMessage msg="Vue dobbelstenen" />
+    <ShowMessage msg="Vue dobbelstenen" />  
+    <button @click="decrementnumberOfDices">-1</button>  
+    <button @click="incrementnumberOfDices">+1</button>
+    <h1>Aantal: {{ numberOfDices }}</h1>
     <button @click="rollDice">Rol dobbelstenen</button>
     <br /><br />
     <div
@@ -40,6 +43,12 @@ export default {
         { eyes: 5, value: 0, unicode: "\u2684" },
         { eyes: 6, value: 0, unicode: "\u2685" },
       ];
+    },
+    incrementnumberOfDices() {
+      this.numberOfDices += 1;
+    },
+    decrementnumberOfDices() {
+      this.numberOfDices -= 1;
     },
   },
   created() {
